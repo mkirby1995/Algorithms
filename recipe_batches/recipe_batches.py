@@ -3,11 +3,19 @@
 import math
 
 def recipe_batches(recipe, ingredients):
-  pass 
+      ammounts = {}
+      for i in recipe:
+          if i in list(ingredients.keys()):
+              ammounts[i] = ingredients[i] / recipe[i]
+      min_batches = min(list(ammounts.values()))
+      if min_batches < 1:
+          return 0
+      else:
+          return min_batches
 
 
 if __name__ == '__main__':
-  # Change the entries of these dictionaries to test 
+  # Change the entries of these dictionaries to test
   # your implementation with different inputs
   recipe = { 'milk': 100, 'butter': 50, 'flour': 5 }
   ingredients = { 'milk': 132, 'butter': 48, 'flour': 51 }
