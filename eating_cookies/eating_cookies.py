@@ -5,25 +5,20 @@ import sys
 # The cache parameter is here for if you want to implement
 # a solution that is more efficient than the naive
 # recursive solution
-def eating_cookies(n, cache=None):
-      ways_to_eat = [1, 2, 3]
-      ways = []
-      if n ==0:
-          return 0
-      else:
-          for i in ways_to_eat:
-              for j in range(i, n + 1):
-                  if i * (n // j) != n:
-                      print(f"Can eat {i} cookies {n // j} times and {i - 1} cookies {(n) // j} times")
-                      print(f"For a total of {i * (n // j) + (i - 1) * ((n) // j)} cookies")
-                      if i * (n // j) + (i - 1) * ((n) // j) == n:
-                          ways.append(1)
-                  else:
-                      print(f"Can eat {i} cookies {n // j} times")
-                      print(f"For a total of {i * (n // j)} cookies")
-                      if i * (n // j) == n:
-                          ways.append(1)
-          return sum(ways)
+cache = {}
+def eating_cookies(n, cache=cache):
+
+  if n == 3:
+    return 4
+  elif n == 2:
+    return 2
+  elif n <= 1:
+    return 1
+
+  if n not in cache:
+    cache[n] = eating_cookies(n-3) + eating_cookies(n-2) + eating_cookies(n-1)
+
+  return cache[n]
 
 
 if __name__ == "__main__":
