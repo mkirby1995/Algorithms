@@ -7,12 +7,24 @@ import sys
 # recursive solution
 def eating_cookies(n, cache=None):
       ways_to_eat = [1, 2, 3]
-      ways = [1] + [0] * n
-      for i in ways_to_eat:
-          for j in range(i, n + 1):
-              ways[j] += ways[j - ways_to_eat]
-      return ways[n]
-  
+      ways = []
+      if n ==0:
+          return 0
+      else:
+          for i in ways_to_eat:
+              for j in range(i, n + 1):
+                  if i * (n // j) != n:
+                      print(f"Can eat {i} cookies {n // j} times and {i - 1} cookies {(n) // j} times")
+                      print(f"For a total of {i * (n // j) + (i - 1) * ((n) // j)} cookies")
+                      if i * (n // j) + (i - 1) * ((n) // j) == n:
+                          ways.append(1)
+                  else:
+                      print(f"Can eat {i} cookies {n // j} times")
+                      print(f"For a total of {i * (n // j)} cookies")
+                      if i * (n // j) == n:
+                          ways.append(1)
+          return sum(ways)
+
 
 if __name__ == "__main__":
   if len(sys.argv) > 1:
